@@ -4,6 +4,7 @@ import com.clinix.modules.user.application.command.writemodel.CreateSecretaryCom
 import com.clinix.modules.user.application.query.readmodel.UserSummaryReadModel;
 import com.clinix.modules.user.domain.UserRepository;
 import com.clinix.modules.user.domain.model.User;
+import com.clinix.modules.user.domain.valueobject.Email;
 import jakarta.enterprise.context.ApplicationScoped;
 import org.jboss.logging.Logger;
 
@@ -20,15 +21,15 @@ public class CreateSecretaryUseCase {
         this.userRepository = userRepository;
     }
 
-    public UserSummaryReadModel execute(CreateSecretaryCommand command) {
+    /*public UserSummaryReadModel execute(CreateSecretaryCommand command) {
 
         User user = new User(
                 UUID.randomUUID(),
-                command.email(),
+                new Email(command.email()),
                 command.password(),
                 command.firstname(),
                 command.lastname()
         );
-    }
+    }*/
 
 }

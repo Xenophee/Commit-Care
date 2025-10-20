@@ -7,20 +7,30 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "users")
-@Inheritance(strategy = InheritanceType.JOINED)
+//@Inheritance(strategy = InheritanceType.JOINED)
 @NamedQueries({
     @NamedQuery(
-            name = "UserEntity.findByUUID",
+            name = "UserEntity.findDoctorByUUID",
             query = """
+                    SELECT user.id as id, user.email as email, user.firstname as firstname, user.lastname as lastname, doctor.officeNumber as officeNumber, doctor.licenseNumber as licenseNumber
+                    FROM UserEntity user
+                    LEFT JOIN user.doctor doctor
+                    WHERE user.id = :id
+                """
+    ),
+        @NamedQuery(
+                name = "UserEntity.findByUUID",
+                query = """
                     SELECT user.id as id, user.email as email, user.firstname as firstname, user.lastname as lastname
                     FROM UserEntity user
                     WHERE user.id = :id
                 """
-    )
+        )
 })
 public class UserEntity {
 
-    public static final String FIND_BY_UUID = "UserEntity.findByUUID";
+    public static final String FIND_BY_UUID = "#UserEntity.findByUUID";
+    public  static final String FIND_DOCTOR_BY_UUID = "#UserEntity.findDoctorByUUID";
 
     @Id
     @GeneratedValue
@@ -43,6 +53,9 @@ public class UserEntity {
 
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = true)
+    private DoctorEntity doctor;
 
 
     public UUID getId() {

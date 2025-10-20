@@ -1,6 +1,6 @@
 package com.clinix.modules.user.domain.valueobject;
 
-import org.mindrot.jbcrypt.BCrypt;
+//import org.mindrot.jbcrypt.BCrypt;
 
 public record Password(String hash) {
 
@@ -10,7 +10,7 @@ public record Password(String hash) {
         }
     }
 
-    public static Password fromPlainText(String plainText) {
+    /*public static Password fromPlainText(String plainText) {
         if (plainText == null || plainText.length() < 8) {
             throw new IllegalArgumentException("Mot de passe trop court");
         }
@@ -25,6 +25,6 @@ public record Password(String hash) {
     @Override
     public String toString() {
         return "****"; // ne jamais exposer le hash
-    }
+    }*/
 }
 

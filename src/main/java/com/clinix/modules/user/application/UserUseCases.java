@@ -6,6 +6,8 @@ import com.clinix.modules.user.application.command.usecase.CreateSecretaryUseCas
 import com.clinix.modules.user.application.command.writemodel.CreateSecretaryCommand;
 import com.clinix.modules.user.application.query.readmodel.UserSummaryReadModel;
 import com.clinix.modules.user.application.query.usecase.GetUserByIdUseCase;
+import com.clinix.modules.user.infrastructure.persistence.projection.UserInfo;
+import com.clinix.modules.user.infrastructure.persistence.projection.UserInfo2;
 import jakarta.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
@@ -21,11 +23,11 @@ public class UserUseCases {
     }
 
 
-    public UserSummaryReadModel getUserById(Uuid uuid) {
+    public UserInfo2 getUserById(Uuid uuid) {
         return getUserByIdUseCase.execute(uuid);
     }
 
     public void createSecretary(CreateSecretaryCommand command) {
-        createSecretaryUseCase.execute(command);
+//        createSecretaryUseCase.execute(command);
     }
 }

@@ -5,6 +5,8 @@ import com.clinix.common.exception.NotFoundException;
 import com.clinix.common.valueobject.Uuid;
 import com.clinix.modules.user.application.query.readmodel.UserSummaryReadModel;
 import com.clinix.modules.user.domain.UserRepository;
+import com.clinix.modules.user.infrastructure.persistence.projection.UserInfo;
+import com.clinix.modules.user.infrastructure.persistence.projection.UserInfo2;
 import jakarta.enterprise.context.ApplicationScoped;
 import org.jboss.logging.Logger;
 
@@ -22,7 +24,7 @@ public class GetUserByIdUseCase {
 
 
 
-    public UserSummaryReadModel execute(Uuid uuid) {
+    public UserInfo2 execute(Uuid uuid) {
 
         return userRepository.findSummaryById(uuid.value())
                 .orElseThrow(() -> {

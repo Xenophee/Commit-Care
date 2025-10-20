@@ -5,6 +5,8 @@ import com.clinix.modules.user.domain.model.User;
 import com.clinix.modules.user.infrastructure.persistence.entity.UserEntity;
 import com.clinix.modules.user.infrastructure.persistence.mapper.UserMapper;
 import com.clinix.modules.user.application.query.readmodel.UserSummaryReadModel;
+import com.clinix.modules.user.infrastructure.persistence.projection.UserInfo;
+import com.clinix.modules.user.infrastructure.persistence.projection.UserInfo2;
 import jakarta.enterprise.context.ApplicationScoped;
 
 import java.util.Optional;
@@ -27,10 +29,16 @@ public class UserRepositoryImpl implements UserRepository {
         userQuery.persist(userEntity);
     }
 
-    @Override
+    /*@Override
     public Optional<UserSummaryReadModel> findSummaryById(UUID id) {
 
         return userQuery.findSummaryById(id)
                 .map(mapper::fromTuple);
+    }*/
+
+    @Override
+    public Optional<UserInfo2> findSummaryById(UUID id) {
+
+        return userQuery.findUserInfoById(id);
     }
 }
