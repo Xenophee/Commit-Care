@@ -8,7 +8,19 @@ import java.util.UUID;
 @Entity
 @Table(name = "users")
 @Inheritance(strategy = InheritanceType.JOINED)
+@NamedQueries({
+    @NamedQuery(
+            name = "UserEntity.findByUUID",
+            query = """
+                    SELECT user.id as id, user.email as email, user.firstname as firstname, user.lastname as lastname
+                    FROM UserEntity user
+                    WHERE user.id = :id
+                """
+    )
+})
 public class UserEntity {
+
+    public static final String FIND_BY_UUID = "UserEntity.findByUUID";
 
     @Id
     @GeneratedValue
@@ -26,7 +38,7 @@ public class UserEntity {
     @Column(nullable = false)
     private String lastname;
 
-    @Column(name = "created_at", insertable = false, updatable = false)
+    @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt;
 
     @Column(name = "updated_at")
