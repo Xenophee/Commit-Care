@@ -57,7 +57,7 @@ class GetUserByIdUseCaseTest {
         UUID uuid = UUID.randomUUID();
         Uuid id = new Uuid(uuid.toString());
 
-        Mockito.when(userRepository.findSummaryById(uuid))
+        Mockito.when(userRepository.findUserSummaryById(uuid))
                 .thenReturn(Optional.empty());
 
         NotFoundException exception = assertThrows(
@@ -65,7 +65,7 @@ class GetUserByIdUseCaseTest {
                 () -> getUserByIdUseCase.execute(id)
         );
 
-        Mockito.verify(userRepository).findSummaryById(uuid);
+        Mockito.verify(userRepository).findUserSummaryById(uuid);
         assertThat(exception.getMessage()).isEqualTo(ErrorCode.USER_NOT_FOUND.getMessage());
     }
 }

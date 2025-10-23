@@ -1,13 +1,13 @@
 package com.clinix.modules.user.infrastructure.persistence.repository;
 
+
 import com.clinix.modules.user.domain.UserRepository;
 import com.clinix.modules.user.domain.model.User;
 import com.clinix.modules.user.infrastructure.persistence.entity.UserEntity;
-import com.clinix.modules.user.infrastructure.persistence.mapper.UserMapper;
-import com.clinix.modules.user.application.query.readmodel.UserSummaryReadModel;
+import com.clinix.modules.user.infrastructure.persistence.projection.DoctorInfo;
 import com.clinix.modules.user.infrastructure.persistence.projection.UserInfo;
-import com.clinix.modules.user.infrastructure.persistence.projection.UserInfo2;
 import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -16,11 +16,10 @@ import java.util.UUID;
 public class UserRepositoryImpl implements UserRepository {
 
     private final UserQuery userQuery;
-    private final UserMapper mapper;
 
-    public UserRepositoryImpl(UserQuery userQuery, UserMapper mapper) {
+    @Inject
+    public UserRepositoryImpl(UserQuery userQuery) {
         this.userQuery = userQuery;
-        this.mapper = mapper;
     }
 
     @Override
@@ -29,16 +28,18 @@ public class UserRepositoryImpl implements UserRepository {
         userQuery.persist(userEntity);
     }
 
-    /*@Override
-    public Optional<UserSummaryReadModel> findSummaryById(UUID id) {
-
-        return userQuery.findSummaryById(id)
-                .map(mapper::fromTuple);
-    }*/
-
     @Override
-    public Optional<UserInfo2> findSummaryById(UUID id) {
-
+    public Optional<UserInfo> findUserSummaryById(UUID id) {
         return userQuery.findUserInfoById(id);
     }
+
+    @Override
+    public Optional<DoctorInfo> findDoctorSummaryById(UUID id) {
+        return userQuery.findDoctorInfoById(id);
+    }
 }
+
+
+
+
+

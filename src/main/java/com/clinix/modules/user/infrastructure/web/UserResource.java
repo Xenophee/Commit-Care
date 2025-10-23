@@ -4,15 +4,11 @@ package com.clinix.modules.user.infrastructure.web;
 import com.clinix.common.constant.ApiRoutes;
 import com.clinix.common.valueobject.Uuid;
 import com.clinix.modules.user.application.UserUseCases;
-import com.clinix.modules.user.application.command.writemodel.CreateSecretaryCommand;
-import com.clinix.modules.user.application.query.readmodel.UserSummaryReadModel;
+import com.clinix.modules.user.infrastructure.persistence.projection.DoctorInfo;
 import com.clinix.modules.user.infrastructure.persistence.projection.UserInfo;
-import com.clinix.modules.user.infrastructure.persistence.projection.UserInfo2;
-import com.clinix.modules.user.infrastructure.web.dto.CreateSecretaryRequest;
 import com.clinix.modules.user.infrastructure.web.dto.UserDTO;
 import com.clinix.modules.user.infrastructure.web.mapper.UserWebMapper;
 import jakarta.ws.rs.GET;
-import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.core.Response;
@@ -54,7 +50,7 @@ public class UserResource {
         LOG.infof("Recherche de l'utilisateur avec l'id : %s", id);
 
         Uuid uuid = new Uuid(id);
-        UserInfo2 model = userUseCases.getUserById(uuid);
+        UserInfo model = userUseCases.getUserById(uuid);
 //        UserDTO user = userWebMapper.toDto(model);
 
         LOG.infof("Utilisateur trouvé : %s", model);

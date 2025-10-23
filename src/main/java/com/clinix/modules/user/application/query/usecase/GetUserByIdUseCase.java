@@ -3,10 +3,9 @@ package com.clinix.modules.user.application.query.usecase;
 import com.clinix.common.exception.ErrorCode;
 import com.clinix.common.exception.NotFoundException;
 import com.clinix.common.valueobject.Uuid;
-import com.clinix.modules.user.application.query.readmodel.UserSummaryReadModel;
 import com.clinix.modules.user.domain.UserRepository;
+import com.clinix.modules.user.infrastructure.persistence.projection.DoctorInfo;
 import com.clinix.modules.user.infrastructure.persistence.projection.UserInfo;
-import com.clinix.modules.user.infrastructure.persistence.projection.UserInfo2;
 import jakarta.enterprise.context.ApplicationScoped;
 import org.jboss.logging.Logger;
 
@@ -24,9 +23,9 @@ public class GetUserByIdUseCase {
 
 
 
-    public UserInfo2 execute(Uuid uuid) {
+    public UserInfo execute(Uuid uuid) {
 
-        return userRepository.findSummaryById(uuid.value())
+        return userRepository.findUserSummaryById(uuid.value())
                 .orElseThrow(() -> {
                     LOG.warnf("Utilisateur non trouvé avec l'id : %s", uuid);
                     return new NotFoundException(ErrorCode.USER_NOT_FOUND);

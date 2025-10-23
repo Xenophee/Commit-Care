@@ -1,8 +1,10 @@
 package com.clinix.modules.user.infrastructure.persistence.projection;
 
+import io.quarkus.runtime.annotations.RegisterForReflection;
+
 import java.util.UUID;
 
-
+@RegisterForReflection
 public class UserInfo {
 
     private UUID id;
@@ -16,11 +18,5 @@ public class UserInfo {
         this.firstname = firstname;
         this.lastname = lastname;
     }
-
-    // Getters
-    public UUID getId() { return id; }
-    public String getEmail() { return email; }
-    public String getFirstname() { return firstname; }
-    public String getLastname() { return lastname; }
 }
 

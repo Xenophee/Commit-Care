@@ -29,7 +29,7 @@ import java.util.UUID;
 })
 public class UserEntity {
 
-    public static final String FIND_BY_UUID = "#UserEntity.findByUUID";
+    public static final String FIND_BY_UUID = "UserEntity.findByUUID";
     public  static final String FIND_DOCTOR_BY_UUID = "#UserEntity.findDoctorByUUID";
 
     @Id
